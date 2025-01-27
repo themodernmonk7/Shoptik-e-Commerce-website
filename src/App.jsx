@@ -7,7 +7,7 @@ import {
   Home,
   Checkout,
   Completion,
-  Error,
+  NotFound,
   Features,
   News,
   Products,
@@ -50,7 +50,7 @@ function App() {
         <Route path="/features" element={<Features />} />
         <Route path="/services" element={<Services />} />
         <Route path="/news" element={<News />} />
-        <Route path="*" element={<Error />} />
+        <Route path="*" element={<NotFound />} />
       </Routes>
       <Footer />
     </BrowserRouter>
