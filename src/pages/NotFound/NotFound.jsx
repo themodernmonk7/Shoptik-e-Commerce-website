@@ -1,8 +1,8 @@
 import React from "react"
 import { Link } from "react-router-dom"
-import PageNotFound from "../assets/undraw_page_not_found.svg"
+import PageNotFound from "../../assets/undraw_page_not_found.svg"
 
-const Error = () => {
+const NotFound = () => {
   return (
     <>
       <section className=" grid place-items-center ">
@@ -25,4 +25,4 @@ const Error = () => {
   )
 }
 
-export default Error
+export default NotFound

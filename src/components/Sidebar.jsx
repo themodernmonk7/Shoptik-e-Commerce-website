@@ -1,9 +1,9 @@
 import React, { useEffect, useRef } from "react"
 import { Link } from "react-router-dom"
-import { navLinks } from "../utils/constants"
 import { BsX } from "react-icons/bs"
 import { Logo } from "../components"
 import { useProductsContext } from "../context/product/products_context"
+import { navLinks } from "../utils/constants"
 
 const Sidebar = () => {
   const { closeSidebar } = useProductsContext()
