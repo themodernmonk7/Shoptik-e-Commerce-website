@@ -7,9 +7,9 @@ import {
   NotFound,
   Sidebar_Filter,
   Loading,
-} from "../components"
-import { useFilterContext } from "../context/filter/filter_context"
-import { useProductsContext } from "../context/product/products_context"
+} from "../../components"
+import { useFilterContext } from "../../context/filter/filter_context"
+import { useProductsContext } from "../../context/product/products_context"
 import ReactGA from "react-ga4"
 const Products = () => {
   const { filtered_products: products } = useFilterContext()

@@ -1,6 +1,6 @@
 import React from "react"
 import { Link } from "react-router-dom"
-import PageNotFound from "../assets/undraw_page_not_found.svg"
+import PageNotFound from "../../assets/undraw_page_not_found.svg"
 
 const Error = () => {
   return (

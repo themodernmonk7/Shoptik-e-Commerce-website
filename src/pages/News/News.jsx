@@ -1,5 +1,5 @@
 import React from "react"
-import { Breadcrumb } from "../components"
+import { Breadcrumb } from "../../components"
 
 const News = () => {
   return (

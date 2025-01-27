@@ -1,7 +1,7 @@
 import React from "react"
-import { Breadcrumb, CartItems } from "../components"
-import { useCartContext } from "../context/cart/cart_context"
-import { Empty_cart } from "../components"
+import { Breadcrumb, CartItems } from "../../components"
+import { useCartContext } from "../../context/cart/cart_context"
+import { Empty_cart } from "../../components"
 
 const Cart = () => {
   const { cart } = useCartContext()

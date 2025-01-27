@@ -1,6 +1,6 @@
 import React from "react"
-import { useProductsContext } from "../context/product/products_context"
-import { single_product_url as url } from "../utils/constants"
+
+import { single_product_url as url } from "../../../utils/constants"
 import { useParams } from "react-router-dom"
 import { useEffect } from "react"
 
@@ -11,8 +11,9 @@ import {
   ProductImages,
   Breadcrumb,
   Stars,
-} from "../components"
-import { formatPrice } from "../utils/helper"
+} from "../../../components"
+import { formatPrice } from "../../../utils/helper"
+import { useProductsContext } from "../../../context/product/products_context"
 
 const SingleProduct = () => {
   const {

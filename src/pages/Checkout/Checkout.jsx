@@ -1,5 +1,5 @@
 import React from "react"
-import { Stripe_Checkout } from "../components"
+import { Stripe_Checkout } from "../../components"
 
 const Checkout = () => {
   return (
