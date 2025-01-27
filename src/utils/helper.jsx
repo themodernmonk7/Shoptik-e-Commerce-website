@@ -13,3 +13,13 @@ export const getUniqueValues = (data, type) => {
   }
   return ["all", ...new Set(dataMap)]
 }
+
+export const trackGAEvent = ({ event, ecommerce }) => {
+  if (typeof window !== undefined) {
+    window.dataLayer = window.dataLayer || []
+    window.dataLayer.push({
+      event,
+      ecommerce,
+    })
+  }
+}

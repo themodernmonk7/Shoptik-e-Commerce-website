@@ -15,10 +15,10 @@ import {
   SingleProduct,
   ProtectedRoute,
 } from "./pages"
-
-const measurementID = "G-Y1EV1Q38PH"
+import { measurementID } from "./utils/constants"
 
 ReactGA.initialize(measurementID)
+
 function App() {
   return (
     <BrowserRouter>
@@ -32,8 +32,7 @@ function App() {
           path="/checkout"
           element={
             <ProtectedRoute>
-              {" "}
-              <Checkout />{" "}
+              <Checkout />
             </ProtectedRoute>
           }
         />
@@ -41,8 +40,7 @@ function App() {
           path="/completion"
           element={
             <ProtectedRoute>
-              {" "}
-              <Completion />{" "}
+              <Completion />
             </ProtectedRoute>
           }
         />

@@ -7,8 +7,7 @@ const CartItems = () => {
   const { cart, removeItem, toggleAmount, total_amount } = useCartContext()
 
   const beginCheckout = () => {
-    window.dataLayer = window.dataLayer || []
-    window.dataLayer.push({
+    trackGAEvent({
       event: "begin_checkout",
       ecommerce: {
         currency: "INR",
