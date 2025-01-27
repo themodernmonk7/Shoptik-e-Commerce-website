@@ -28,3 +28,4 @@ export const navLinks = [
 
 export const products_url = ".netlify/functions/products"
 export const single_product_url = `/.netlify/functions/single-product?id=`
+export const measurementID = "G-Y1EV1Q38PH"

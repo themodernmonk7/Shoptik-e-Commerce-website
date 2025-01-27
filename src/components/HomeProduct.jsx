@@ -3,7 +3,6 @@ import { Link } from "react-router-dom"
 import { useProductsContext } from "../context/product/products_context"
 import { Loading, Error, ProductImage, Product_title } from "../components"
 import { useFilterContext } from "../context/filter/filter_context"
-import ReactGA from "react-ga4"
 import { getUniqueValues } from "../utils/helper"
 
 const HomeProduct = () => {
@@ -30,11 +29,6 @@ const HomeProduct = () => {
                   key={index}
                   onClick={(e) => {
                     updateFilters(e)
-                    ReactGA.event({
-                      category: "example category",
-                      action: "tab button clicked",
-                      label: "Example Button",
-                    })
                   }}
                   className={` snap-start text-start font-medium uppercase tracking-widest ${
                     category === categoryButton
@@ -47,13 +41,6 @@ const HomeProduct = () => {
               )
             })}
           </div>
-          {/* Left button */}
-          {/* <div className="space-x-2 text-xs  ">
-            <button className="uppercase tracking-widest border-r pr-2 border-black">
-              Back
-            </button>
-            <button className="uppercase tracking-widest">Next</button>
-          </div> */}
         </div>
 
         <div className="container mx-auto mt-10 px-5 xl:px-28">
@@ -82,7 +69,6 @@ const HomeProduct = () => {
             })}
           </div>
 
-          {/* Button */}
           <div className="my-10 flex flex-row items-center justify-between space-x-4">
             <div className=" w-2/3 border-b bg-gray-600 xl:w-2/5"></div>
             <Link

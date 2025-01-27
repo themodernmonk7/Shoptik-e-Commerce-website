@@ -12,7 +12,7 @@ import {
   Breadcrumb,
   Stars,
 } from "../../../components"
-import { formatPrice } from "../../../utils/helper"
+import { formatPrice, trackGAEvent } from "../../../utils/helper"
 import { useProductsContext } from "../../../context/product/products_context"
 
 const SingleProduct = () => {
@@ -31,8 +31,7 @@ const SingleProduct = () => {
 
   useEffect(() => {
     if (product) {
-      window.dataLayer = window.dataLayer || []
-      window.dataLayer.push({
+      trackGAEvent({
         event: "view_item",
         ecommerce: {
           currency: "INR",

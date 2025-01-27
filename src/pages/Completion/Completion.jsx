@@ -2,6 +2,7 @@ import React, { useEffect } from "react"
 import { BsFillCheckCircleFill, BsArrowRight } from "react-icons/bs"
 import { Link, useNavigate, useSearchParams } from "react-router-dom"
 import { useCartContext } from "../../context/cart/cart_context"
+import { trackGAEvent } from "../../utils/helper"
 
 const Completion = () => {
   const navigate = useNavigate()
@@ -26,8 +27,7 @@ const Completion = () => {
     }
     if (paymentIntent) {
       clearCart()
-      window.dataLayer = window.dataLayer || []
-      window.dataLayer.push({
+      trackGAEvent({
         event: "purchase",
         ecommerce: {
           transaction_id: paymentIntent,

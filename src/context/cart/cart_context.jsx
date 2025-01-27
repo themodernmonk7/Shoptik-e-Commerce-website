@@ -7,6 +7,7 @@ import {
   CLEAR_CART,
   COUNT_CART_TOTALS,
 } from "../../actions/actions"
+import { trackGAEvent } from "../../utils/helper"
 
 const getLocalStorage = () => {
   let cart = localStorage.getItem("cart")
@@ -30,8 +31,8 @@ export const CartProvider = ({ children }) => {
 
   const addToCart = (id, color, amount, product) => {
     dispatch({ type: ADD_TO_CART, payload: { id, color, amount, product } })
-    window.dataLayer = window.dataLayer || []
-    window.dataLayer.push({
+
+    trackGAEvent({
       event: "add_to_cart",
       ecommerce: {
         currency: "INR",
