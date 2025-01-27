@@ -33,7 +33,6 @@ const Products = () => {
           {products.length >= 1 && <Sort />}
           <AllProducts />
         </div>
-        {/* Sidebar filter */}
         <Sidebar_Filter />
       </section>
     </>

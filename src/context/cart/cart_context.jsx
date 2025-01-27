@@ -28,7 +28,6 @@ const CartContext = createContext()
 export const CartProvider = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, initialState)
 
-  //   Add to Cart
   const addToCart = (id, color, amount, product) => {
     dispatch({ type: ADD_TO_CART, payload: { id, color, amount, product } })
     window.dataLayer = window.dataLayer || []
@@ -49,17 +48,14 @@ export const CartProvider = ({ children }) => {
     })
   }
 
-  // Remove item
   const removeItem = (id) => {
     dispatch({ type: REMOVE_CART_ITEM, payload: { id } })
   }
 
-  // Toggle amount
   const toggleAmount = (id, value) => {
     dispatch({ type: TOGGLE_CART_ITEM_AMOUNT, payload: { id, value } })
   }
 
-  // Clear cart
   const clearCart = () => {
     dispatch({ type: CLEAR_CART })
   }

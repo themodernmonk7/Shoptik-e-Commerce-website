@@ -1,9 +1,8 @@
 import React, { useContext } from "react"
 import { useReducer } from "react"
 import reducer from "../../reducers/product/products_reducer"
-import { products_url as url, single_product_url } from "../../utils/constants"
+import { products_url as url } from "../../utils/constants"
 
-// Import actions variable
 import {
   SIDEBAR_OPEN,
   SIDEBAR_CLOSE,
@@ -19,7 +18,6 @@ import { useEffect } from "react"
 
 const ProductsContext = React.createContext()
 
-// Create initial state for userReducer function
 const initialState = {
   isSidebarOpen: false,
   products_loading: false,
@@ -34,19 +32,15 @@ const initialState = {
 }
 
 export const ProductsProvider = ({ children }) => {
-  // Create userReducer function
   const [state, dispatch] = useReducer(reducer, initialState)
 
-  // Open sidebar
   const openSidebar = () => {
     dispatch({ type: SIDEBAR_OPEN })
   }
-  // Close sidebar
   const closeSidebar = () => {
     dispatch({ type: SIDEBAR_CLOSE })
   }
 
-  // Fetch all products
   const fetchAllProducts = async (url) => {
     dispatch({ type: GET_PRODUCTS_BEGIN })
     try {
@@ -58,7 +52,6 @@ export const ProductsProvider = ({ children }) => {
     }
   }
 
-  // Fetch single product
   const fetchSingleProduct = async (url) => {
     dispatch({ type: GET_SINGLE_PRODUCT_BEGIN })
     try {
@@ -84,7 +77,6 @@ export const ProductsProvider = ({ children }) => {
   )
 }
 
-// Create custom hook
 export const useProductsContext = () => {
   return useContext(ProductsContext)
 }

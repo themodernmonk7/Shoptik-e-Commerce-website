@@ -14,6 +14,7 @@ import {
 } from "../../actions/actions"
 import { useProductsContext } from "../product/products_context"
 import { useEffect } from "react"
+
 const initialState = {
   filtered_products: [],
   all_products: [],

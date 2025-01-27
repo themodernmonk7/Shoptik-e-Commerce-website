@@ -14,13 +14,15 @@ const products_reducer = (state, action) => {
   if (action.type === SIDEBAR_OPEN) {
     return { ...state, isSidebarOpen: true }
   }
+
   if (action.type === SIDEBAR_CLOSE) {
     return { ...state, isSidebarOpen: false }
   }
-  //* ================= All Products actions =================
+
   if (action.type === GET_PRODUCTS_BEGIN) {
     return { ...state, products_loading: true }
   }
+
   if (action.type === GET_PRODUCTS_SUCCESS) {
     const allFeaturedProducts = action.payload.filter(
       (product) => product.featured === true
@@ -43,9 +45,6 @@ const products_reducer = (state, action) => {
   if (action.type === GET_PRODUCTS_ERROR) {
     return { ...state, products_loading: false, products_error: true }
   }
-  //* ================= END =================
-
-  //* ================= Single Product actions =================
 
   if (action.type === GET_SINGLE_PRODUCT_BEGIN) {
     return {
@@ -54,6 +53,7 @@ const products_reducer = (state, action) => {
       single_product_loading: true,
     }
   }
+
   if (action.type === GET_SINGLE_PRODUCT_SUCCESS) {
     return {
       ...state,
@@ -61,6 +61,7 @@ const products_reducer = (state, action) => {
       singleProduct: action.payload,
     }
   }
+
   if (action.payload === GET_SINGLE_PRODUCT_ERROR) {
     return {
       ...state,
@@ -68,7 +69,6 @@ const products_reducer = (state, action) => {
       single_product_error: true,
     }
   }
-  //* ================= END =================
 
   throw new Error(`No matching "${action.type}" - action type `)
 }
