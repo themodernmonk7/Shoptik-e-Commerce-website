@@ -26,7 +26,7 @@ const initialState = {
   featured_products: [],
   newArrival_products: [],
   bestSeller_products: [],
-  single_product_loading: false,
+  single_product_loading: true,
   single_product_error: false,
   singleProduct: {},
 }
