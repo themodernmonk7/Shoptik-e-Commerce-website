@@ -1,8 +1,12 @@
 import React from "react"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 
 const ProductImages = ({ product, images = [{ url: "" }] }) => {
   const [main, setMain] = useState(images[0])
+
+  useEffect(() => {
+    setMain(images[0])
+  }, [images])
   return (
     <>
       <section className={` space-y-4 `}>
