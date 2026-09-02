@@ -17,6 +17,7 @@ import {
 } from "./pages"
 import { measurementID } from "./utils/constants"
 import { WebMCPTools } from "./webmcp"
+import PostHogIdentify from "./analytics/PostHogIdentify"
 
 ReactGA.initialize(measurementID)
 
@@ -25,6 +26,7 @@ function App() {
     <BrowserRouter>
       <Navbar />
       <WebMCPTools />
+      <PostHogIdentify />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/cart" element={<Cart />} />

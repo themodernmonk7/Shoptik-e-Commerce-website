@@ -3,6 +3,8 @@ import React from "react"
 import { single_product_url as url } from "../../../utils/constants"
 import { useParams } from "react-router-dom"
 import { useEffect } from "react"
+import { usePostHog } from "@posthog/react"
+import { POSTHOG_EVENTS } from "../../../analytics/posthogEvents"
 
 import {
   AddToCart,
@@ -23,6 +25,7 @@ const SingleProduct = () => {
     fetchSingleProduct,
   } = useProductsContext()
   const { id } = useParams()
+  const posthog = usePostHog()
 
   useEffect(() => {
     fetchSingleProduct(`${url}${id}`)
@@ -44,6 +47,15 @@ const SingleProduct = () => {
             },
           ],
         },
+      })
+    }
+
+    if (product?.id) {
+      posthog?.capture(POSTHOG_EVENTS.VIEW_ITEM, {
+        product_id: product.id,
+        product_name: product.name,
+        price: product.price,
+        currency: "INR",
       })
     }
   }, [product])

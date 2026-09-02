@@ -1,4 +1,6 @@
 import { createContext, useContext, useEffect, useReducer } from "react"
+import { usePostHog } from "@posthog/react"
+import { POSTHOG_EVENTS } from "../../analytics/posthogEvents"
 import reducer from "../../reducers/cart/cart_reducer"
 import {
   ADD_TO_CART,
@@ -28,6 +30,7 @@ const initialState = {
 const CartContext = createContext()
 export const CartProvider = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, initialState)
+  const posthog = usePostHog()
 
   const addToCart = (id, color, amount, product) => {
     dispatch({ type: ADD_TO_CART, payload: { id, color, amount, product } })
@@ -47,10 +50,22 @@ export const CartProvider = ({ children }) => {
         ],
       },
     })
+
+    posthog?.capture(POSTHOG_EVENTS.ADD_TO_CART, {
+      product_id: product.id,
+      product_name: product.name,
+      color,
+      quantity: amount,
+      price: product.price,
+      value: amount * product.price,
+      currency: "INR",
+    })
   }
 
   const removeItem = (id) => {
     dispatch({ type: REMOVE_CART_ITEM, payload: { id } })
+
+    posthog?.capture(POSTHOG_EVENTS.REMOVE_FROM_CART, { cart_item_id: id })
   }
 
   const toggleAmount = (id, value) => {
@@ -59,6 +74,8 @@ export const CartProvider = ({ children }) => {
 
   const clearCart = () => {
     dispatch({ type: CLEAR_CART })
+
+    posthog?.capture(POSTHOG_EVENTS.CLEAR_CART)
   }
 
   useEffect(() => {

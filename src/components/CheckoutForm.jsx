@@ -5,10 +5,13 @@ import {
   useElements,
 } from "@stripe/react-stripe-js"
 import { useEffect, useState } from "react"
+import { usePostHog } from "@posthog/react"
+import { POSTHOG_EVENTS } from "../analytics/posthogEvents"
 
 const CheckoutForm = () => {
   const stripe = useStripe()
   const elements = useElements()
+  const posthog = usePostHog()
 
   const [email, setEmail] = useState("")
   const [message, setMessage] = useState(null)
@@ -19,7 +22,7 @@ const CheckoutForm = () => {
       return
     }
     const clientSecret = new URLSearchParams(window.location.search).get(
-      "payment_intent_secret"
+      "payment_intent_secret",
     )
     if (!clientSecret) {
       return
@@ -66,8 +69,14 @@ const CheckoutForm = () => {
     // redirected to the `return_url`.
     if (error.type === "card_error" || error.type === "validation_error") {
       setMessage(error.message)
+      posthog?.capture(POSTHOG_EVENTS.PAYMENT_FAILED, {
+        error_type: error.type,
+        error_code: error.code,
+        error_message: error.message,
+      })
     } else {
       setMessage("An unexpected error occurred.")
+      posthog?.capture(POSTHOG_EVENTS.PAYMENT_FAILED, { error_type: error?.type })
     }
     setIsLoading(false)
   }
