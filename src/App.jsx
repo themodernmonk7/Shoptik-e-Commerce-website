@@ -16,6 +16,7 @@ import {
   ProtectedRoute,
 } from "./pages"
 import { measurementID } from "./utils/constants"
+import { WebMCPTools } from "./webmcp"
 
 ReactGA.initialize(measurementID)
 
@@ -23,6 +24,7 @@ function App() {
   return (
     <BrowserRouter>
       <Navbar />
+      <WebMCPTools />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/cart" element={<Cart />} />
