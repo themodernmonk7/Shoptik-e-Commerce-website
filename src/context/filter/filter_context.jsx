@@ -1,6 +1,8 @@
 import { useReducer } from "react"
 import { useContext } from "react"
 import { createContext } from "react"
+import { usePostHog } from "@posthog/react"
+import { POSTHOG_EVENTS } from "../../analytics/posthogEvents"
 import reducer from "../../reducers/filter/filter_reducer"
 import {
   LOAD_PRODUCTS,
@@ -36,6 +38,7 @@ const FilterContext = createContext()
 export const FiltersProvider = ({ children }) => {
   const { products } = useProductsContext()
   const [state, dispatch] = useReducer(reducer, initialState)
+  const posthog = usePostHog()
 
   useEffect(() => {
     dispatch({ type: LOAD_PRODUCTS, payload: products })
@@ -56,6 +59,7 @@ export const FiltersProvider = ({ children }) => {
   const updateSort = (e) => {
     const value = e.target.value
     dispatch({ type: UPDATE_SORT, payload: value })
+    posthog?.capture(POSTHOG_EVENTS.PRODUCT_LIST_SORTED, { sort: value })
   }
 
   const updateFilters = (e) => {
@@ -74,10 +78,18 @@ export const FiltersProvider = ({ children }) => {
       value = e.target.dataset.color
     }
     dispatch({ type: UPDATE_FILTERS, payload: { name, value } })
+
+    if (name !== "text" && name !== "price") {
+      posthog?.capture(POSTHOG_EVENTS.PRODUCT_FILTER_APPLIED, {
+        filter_name: name,
+        filter_value: value,
+      })
+    }
   }
 
   const clearFilters = (e) => {
     dispatch({ type: CLEAR_FILTERS })
+    posthog?.capture(POSTHOG_EVENTS.PRODUCT_FILTERS_CLEARED)
   }
 
   return (

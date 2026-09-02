@@ -1,6 +1,8 @@
 import React, { useEffect } from "react"
 import { BsFillCheckCircleFill, BsArrowRight } from "react-icons/bs"
 import { Link, useNavigate, useSearchParams } from "react-router-dom"
+import { usePostHog } from "@posthog/react"
+import { POSTHOG_EVENTS } from "../../analytics/posthogEvents"
 import { useCartContext } from "../../context/cart/cart_context"
 import { trackGAEvent } from "../../utils/helper"
 
@@ -9,6 +11,7 @@ const Completion = () => {
   const [searchParams] = useSearchParams()
   const paymentIntent = searchParams.get("payment_intent")
   const { cart, total_amount, clearCart } = useCartContext()
+  const posthog = usePostHog()
 
   useEffect(() => {
     const timeId = setTimeout(() => {
@@ -40,6 +43,18 @@ const Completion = () => {
             quantity: item.amount,
           })),
         },
+      })
+
+      posthog?.capture(POSTHOG_EVENTS.PURCHASE, {
+        transaction_id: paymentIntent,
+        currency: "INR",
+        value: total_amount,
+        items: cart.map((item) => ({
+          item_id: item.id,
+          item_name: item.name,
+          price: item.price,
+          quantity: item.amount,
+        })),
       })
     }
   }, [paymentIntent])

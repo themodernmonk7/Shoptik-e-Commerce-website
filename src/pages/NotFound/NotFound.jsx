@@ -1,8 +1,19 @@
-import React from "react"
-import { Link } from "react-router-dom"
+import React, { useEffect } from "react"
+import { Link, useLocation } from "react-router-dom"
+import { usePostHog } from "@posthog/react"
+import { POSTHOG_EVENTS } from "../../analytics/posthogEvents"
 import PageNotFound from "../../assets/undraw_page_not_found.svg"
 
 const NotFound = () => {
+  const location = useLocation()
+  const posthog = usePostHog()
+
+  useEffect(() => {
+    posthog?.capture(POSTHOG_EVENTS.PAGE_NOT_FOUND, {
+      attempted_path: location.pathname,
+    })
+  }, [location.pathname, posthog])
+
   return (
     <>
       <section className=" grid place-items-center ">
